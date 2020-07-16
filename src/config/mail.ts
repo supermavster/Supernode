@@ -1,5 +1,8 @@
 /* eslint-disable no-process-env */
 const nodemailer = require('nodemailer');
+const DotenvFlow = require('dotenv-flow');
+
+DotenvFlow.config({path: './environment'});
 
 export const GmailTransport = nodemailer.createTransport({
   service: process.env.GMAIL_SERVICE_NAME,

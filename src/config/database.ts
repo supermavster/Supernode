@@ -1,4 +1,8 @@
 /* eslint-disable no-process-env */
+const DotenvFlow = require('dotenv-flow');
+
+DotenvFlow.config({path: './environment'});
+
 module.exports = {
   development: {
     username: process.env.DEV_DB_USERNAME || 'root',
@@ -16,10 +20,11 @@ module.exports = {
     dialect: 'mysql'
   },
   production: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOSTNAME,
-    dialect: 'mysql'
+    username: process.env.PROD_DB_USERNAME || 'root',
+    password: process.env.PROD_DB_PASSWORD || 'secret',
+    database: process.env.PROD_DB_NAME || 'test',
+    host: process.env.PROD_DB_HOSTNAME || '127.0.0.1',
+    dialect: process.env.PROD_DB_SYSTEM || 'mysql',
+    port: process.env.PROD_DB_PORT || 3306
   }
 };

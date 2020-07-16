@@ -10,3 +10,5 @@ dist
 *.md
 lib
 build
+dist/
+dist/*

@@ -1,11 +1,14 @@
 /* eslint-disable import/no-anonymous-default-export */
 /* eslint-disable no-process-env */
-import DotenvFlow from 'dotenv-flow';
+// import DotenvFlow from 'dotenv-flow';
 
-DotenvFlow.config({path: './environment'});
+// DotenvFlow.config({path: './environment'});
+const DotenvFlow = require('dotenv-flow');
 
 const MailConfig = require('./mail');
 const DatabaseConfig = require('./database');
+
+DotenvFlow.config({path: './environment'});
 
 let database = {};
 const processEnv = process.env.ENV || 'development';

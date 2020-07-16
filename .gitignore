@@ -123,7 +123,5 @@ dist
 
 # Data
 supermavster/
-cert/*
-cert/**
 environment/.env.local
 # environment/.env.production

@@ -1,3 +1,5 @@
+import path from 'path';
+
 import YAML from 'yamljs';
 import expressOasGenerator from 'express-oas-generator';
 import listEndpoints from 'express-list-endpoints';
@@ -5,7 +7,8 @@ import _ from 'lodash';
 
 import {FormatData} from '../utils/FormatData';
 
-const swaggerDocument = YAML.load('./src/api/documentation/api.client.yaml');
+const pathYaml = path.join(__dirname, '../api/documentation/api.client.yaml');
+const swaggerDocument = YAML.load(pathYaml);
 
 export class ApiDocApp {
   response: any | undefined;
@@ -43,7 +46,7 @@ export class ApiDocApp {
         });
         return spec;
       },
-      specOutputPath: './src/api/documentation/api.json'
+      specOutputPath: path.join(__dirname, '../api/documentation/api.json')
     });
     expressOasGenerator.handleRequests();
   }

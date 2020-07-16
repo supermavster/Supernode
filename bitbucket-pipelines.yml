@@ -25,35 +25,21 @@ pipelines:
           caches:
             - node
           script:
+            - chmod 777 ./base.sh
+            - sed -i "s/PROJECT/${PROJECT}/g" ./base.sh
+            - chmod 777 ./base.sh
             - yarn super:build
             - pipe: atlassian/sftp-deploy:0.5.5
               variables:
                 USER: $USER
                 SERVER: '$SERVER'
-                REMOTE_PATH: /home/$project/
+                REMOTE_PATH: /home/$PROJECT/
                 LOCAL_PATH: 'dist/*'
                 DEBUG: 'true'
                 EXTRA_ARGS: '-i cert/$USER.pem'
       - step:
           name: Reset Node
           script:
-            - mkdir -p ~/.ssh
-            - cat my_known_hosts >> ~/.ssh/known_hosts
-            - (umask  077 ; echo $MY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
-            - chmod 400 cert/$USER.pem
-            - ssh -i cert/$USER.pem $USER@$SERVER 'npm --prefix /home/$user run restart /home/$project/server.js -f --reset-cache'
-            # - mkdir -p ~/.ssh
-            # # - cat cert/$user.pem >> ~/.ssh/known_hosts
-            # # - openssl rsa -in $user.pem -out ~/.ssh/id_rsa)
-            # - cat cert/id_rsa >>  ~/.ssh/id_rsa
-            # - chmod 400 ~/.ssh/id_rsa
-            # # - (umask  077 ; echo $MY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
-            # - ssh $user@$SERVER 'echo "connected to `host` as $user"'
-            # - pipe: atlassian/ssh-run:0.2.6
-            #   variables:
-            #     MODE: 'command'
-            #     SSH_USER: '$user'
-            #     SERVER: '$SERVER'
-            #     COMMAND: 'npm --prefix /home/$user run start /home/$project/server.js --name $project  --reset-cache'
-            #     DEBUG: 'true'
-            #     EXTRA_ARGS: '-i cert/$user.pem'
+            - cd cert/
+            - chmod 400 $USER.pem
+            - ssh -i $USER.pem $USER@$SERVER /home/$PROJECT/base.sh

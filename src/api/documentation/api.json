@@ -3,341 +3,209 @@
   "paths": {
     "/vk/generate-access-token": {
       "get": {
-        "tags": [
-          "vk"
-        ],
+        "tags": ["vk"],
         "description": "Generate Services - VK - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/login": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/signup": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/confirm-email/:uid": {
       "get": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/recovery-password": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/check-code": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/change-password": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/grade": {
       "get": {
-        "tags": [
-          "grade"
-        ],
+        "tags": ["grade"],
         "description": "Generate Services - GRADE - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "post": {
-        "tags": [
-          "grade"
-        ],
+        "tags": ["grade"],
         "description": "Generate Services - GRADE - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/grade/:id": {
       "get": {
-        "tags": [
-          "grade"
-        ],
+        "tags": ["grade"],
         "description": "Generate Services - GRADE - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "put": {
-        "tags": [
-          "grade"
-        ],
+        "tags": ["grade"],
         "description": "Generate Services - GRADE - PUT",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "delete": {
-        "tags": [
-          "grade"
-        ],
+        "tags": ["grade"],
         "description": "Generate Services - GRADE - DELETE",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/school": {
       "get": {
-        "tags": [
-          "school"
-        ],
+        "tags": ["school"],
         "description": "Generate Services - SCHOOL - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "post": {
-        "tags": [
-          "school"
-        ],
+        "tags": ["school"],
         "description": "Generate Services - SCHOOL - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/school/:id": {
       "get": {
-        "tags": [
-          "school"
-        ],
+        "tags": ["school"],
         "description": "Generate Services - SCHOOL - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "put": {
-        "tags": [
-          "school"
-        ],
+        "tags": ["school"],
         "description": "Generate Services - SCHOOL - PUT",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "delete": {
-        "tags": [
-          "school"
-        ],
+        "tags": ["school"],
         "description": "Generate Services - SCHOOL - DELETE",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/city": {
       "get": {
-        "tags": [
-          "city"
-        ],
+        "tags": ["city"],
         "description": "Generate Services - CITY - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "post": {
-        "tags": [
-          "city"
-        ],
+        "tags": ["city"],
         "description": "Generate Services - CITY - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/city/:id": {
       "get": {
-        "tags": [
-          "city"
-        ],
+        "tags": ["city"],
         "description": "Generate Services - CITY - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "put": {
-        "tags": [
-          "city"
-        ],
+        "tags": ["city"],
         "description": "Generate Services - CITY - PUT",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "delete": {
-        "tags": [
-          "city"
-        ],
+        "tags": ["city"],
         "description": "Generate Services - CITY - DELETE",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/student/login": {
       "post": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/student/signup": {
       "post": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/student/confirm-email/:uid": {
       "get": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/student/recovery-password": {
       "post": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/student/check-code": {
       "post": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/student/change-password": {
       "post": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/student": {
       "get": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "post": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/student/:id": {
       "get": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "put": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - PUT",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "delete": {
-        "tags": [
-          "student"
-        ],
+        "tags": ["student"],
         "description": "Generate Services - STUDENT - DELETE",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     }
   },
@@ -362,14 +230,7 @@
       "description": "User Services"
     }
   ],
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ]
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"]
 }
