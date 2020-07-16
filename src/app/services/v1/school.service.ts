@@ -1,3 +1,5 @@
+import sha1 from 'crypto-js/sha1';
+
 import config from '../../../config';
 import {SchoolRepository} from '../../repository';
 import {IComplements} from '../../../resources/interfaces';
@@ -52,6 +54,7 @@ export class SchoolService {
   };
 
   create = async (request: IComplements.CRUDImage) => {
+    request.slug = sha1(request.name.toString().trim()).toString();
     const data = await this.schoolRepository.create(request);
     if (typeof data === 'undefined' || !data) {
       return {
@@ -68,9 +71,8 @@ export class SchoolService {
 
   update = async (key: IComplements.ID, request: IComplements.CRUDImage) => {
     const id: number = key.id;
+    request.slug = sha1(request.name.toString().trim()).toString();
     const data = await this.schoolRepository.update(request, {id});
-    // eslint-disable-next-line no-console
-    console.log(data);
     if (typeof data === 'undefined' || !data) {
       return {
         status: false,

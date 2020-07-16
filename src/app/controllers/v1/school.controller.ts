@@ -52,7 +52,11 @@ export class SchoolController {
     // Generate Logic
     const data: IComplements.CRUDImage = request.body;
     const content = await this.schoolService.create(data);
-    await this.returnData(response, nextOrError, content);
+    await this.returnData(response, nextOrError, content, {
+      upload: true,
+      router: 'schools',
+      files: request.files
+    });
   };
 
   update = async (
@@ -65,13 +69,26 @@ export class SchoolController {
     const id: IComplements.ID = {id: parseInt(request.params.id)};
     const data: IComplements.CRUDImage = request.body;
     const content = await this.schoolService.update(id, data);
-    await this.returnData(response, nextOrError, content);
+    await this.returnData(response, nextOrError, content, {
+      upload: true,
+      router: 'schools',
+      files: request.files,
+      update: true
+    });
   };
 
   private returnData(
     response: Response,
     nextOrError: NextFunction,
-    content: any
+    content: any,
+    images:
+      | {
+          upload: boolean;
+          router: string;
+          files: import('express-fileupload').FileArray | undefined;
+          update?: boolean;
+        }
+      | undefined = undefined
   ) {
     // Context Base
     let codeResponse = OK;
@@ -86,7 +103,22 @@ export class SchoolController {
     const message = content.message;
     if (typeof content.data !== 'undefined') {
       body = content.data;
+      if (
+        typeof body.slug !== 'undefined' &&
+        typeof images!.upload !== 'undefined' &&
+        typeof images!.router !== 'undefined' &&
+        typeof images!.files !== 'undefined'
+      ) {
+        const uploadAnyFiles = new UploadAnyFiles();
+        if (images!.update) {
+          // Remove Files
+          uploadAnyFiles.deleteFolderRecursive(images!.router, body.slug);
+        }
+        // Upload File
+        uploadAnyFiles.uploadFiles(images!.files, images!.router, body.slug);
+      }
     }
+
     response.status(codeResponse).json({
       success: getStatusText(codeResponse),
       code,
