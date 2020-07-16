@@ -4,6 +4,7 @@ import {PasswordResetRepository} from './v1/passwordReset.repository';
 import {GradeRepository} from './v1/grade.repository';
 import {SchoolRepository} from './v1/school.repository';
 import {CityRepository} from './v1/city.repository';
+import {StudentRepository} from './v1/student.repository';
 
 export {
   UsersRepository,
@@ -11,5 +12,6 @@ export {
   PasswordResetRepository,
   GradeRepository,
   SchoolRepository,
-  CityRepository
+  CityRepository,
+  StudentRepository
 };

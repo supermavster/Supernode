@@ -8,8 +8,8 @@ import OnboardingRouter from './onboarding.router';
 import GradeRouter from './grade.router';
 import SchoolRouter from './school.router';
 import CityRouter from './city.router';
+import StudentRouter from './student.router';
 // // import UserRouter from './user.router';
-// // import StudentRouter from './student.router';
 
 // // const listEndpoints = require('express-list-endpoints');
 
@@ -21,8 +21,8 @@ apiRouter.use('/onboarding', OnboardingRouter);
 apiRouter.use('/grade', GradeRouter);
 apiRouter.use('/school', SchoolRouter);
 apiRouter.use('/city', CityRouter);
+apiRouter.use('/student', StudentRouter);
 // // apiRouter.use('/users', UserRouter);
-// // apiRouter.use('/student', StudentRouter);
 
 // Exception
 apiRouter.all(
