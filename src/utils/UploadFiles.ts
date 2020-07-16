@@ -17,6 +17,7 @@ export class UploadAnyFiles {
     if (typeof slug !== 'undefined') {
       path += `/${slug}`;
     }
+    // fs.rmdirSync(path, {recursive: true});
     if (fs.existsSync(path)) {
       fs.readdirSync(path).forEach((file: any) => {
         const curPath = Path.join(path, file);
