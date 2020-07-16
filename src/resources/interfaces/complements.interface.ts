@@ -12,6 +12,10 @@ export interface ID {
 export interface CRUD {
   name: string;
 }
+export interface CRUDImage {
+  name: string;
+  slug: string;
+}
 export interface CRUDUpdate {
   id: number;
   name: string;

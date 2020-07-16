@@ -1,15 +1,15 @@
 import config from '../../../config';
-import {GradeRepository} from '../../repository';
+import {SchoolRepository} from '../../repository';
 import {IComplements} from '../../../resources/interfaces';
 // Language
 const language = `../../../resources/lang/${config.LANGUAGE}`;
 const lang = require(language);
 
-export class GradeService {
-  gradeRepository: GradeRepository = new GradeRepository();
+export class SchoolService {
+  schoolRepository: SchoolRepository = new SchoolRepository();
 
   all = async () => {
-    const data = await this.gradeRepository.all();
+    const data = await this.schoolRepository.all();
     // Check if Exist
     if (typeof data === 'undefined' || !data) {
       return {
@@ -26,7 +26,7 @@ export class GradeService {
 
   index = async (request: IComplements.ID) => {
     const id: number = request.id;
-    const data = await this.gradeRepository.index({id});
+    const data = await this.schoolRepository.index({id});
     // Check if Exist
     if (typeof data === 'undefined' || !data) {
       return {
@@ -43,7 +43,7 @@ export class GradeService {
 
   remove = async (request: IComplements.ID) => {
     const id: number = request.id;
-    const data = await this.gradeRepository.destroy({id});
+    const data = await this.schoolRepository.destroy({id});
     return {
       status: true,
       data,
@@ -51,8 +51,8 @@ export class GradeService {
     };
   };
 
-  create = async (request: IComplements.CRUD) => {
-    const data = await this.gradeRepository.create(request);
+  create = async (request: IComplements.CRUDImage) => {
+    const data = await this.schoolRepository.create(request);
     if (typeof data === 'undefined' || !data) {
       return {
         status: false,
@@ -66,9 +66,9 @@ export class GradeService {
     };
   };
 
-  update = async (key: IComplements.ID, request: IComplements.CRUD) => {
+  update = async (key: IComplements.ID, request: IComplements.CRUDImage) => {
     const id: number = key.id;
-    const data = await this.gradeRepository.update(request, {id});
+    const data = await this.schoolRepository.update(request, {id});
     // eslint-disable-next-line no-console
     console.log(data);
     if (typeof data === 'undefined' || !data) {

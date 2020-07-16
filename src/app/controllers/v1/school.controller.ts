@@ -3,19 +3,20 @@ import {Request, Response, NextFunction} from 'express';
 import {OK, BAD_REQUEST, getStatusText} from 'http-status-codes';
 
 import {CODE_OK, CODE_ERROR} from '../../../resources/constants/codes.constant';
-import {GradeService} from '../../services';
+import {SchoolService} from '../../services';
+import {UploadAnyFiles} from '../../../utils/UploadFiles';
 import {IComplements} from '../../../resources/interfaces';
 
-export class GradeController {
-  private gradeService = new GradeService();
+export class SchoolController {
+  private schoolService = new SchoolService();
   //   'all' | 'get' | 'post' | 'put' | 'delete' | 'patch' | 'options' | 'head' = any> {
   all = async (
-    _request: Request,
+    request: Request,
     response: Response,
     nextOrError: NextFunction
   ) => {
     // Generate Logic
-    const content = await this.gradeService.all();
+    const content = await this.schoolService.all();
     await this.returnData(response, nextOrError, content);
   };
 
@@ -27,7 +28,7 @@ export class GradeController {
     // Generate Logic
     // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
-    const content = await this.gradeService.index(id);
+    const content = await this.schoolService.index(id);
     await this.returnData(response, nextOrError, content);
   };
 
@@ -39,7 +40,7 @@ export class GradeController {
     // Generate Logic
     // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
-    const content = await this.gradeService.remove(id);
+    const content = await this.schoolService.remove(id);
     await this.returnData(response, nextOrError, content);
   };
 
@@ -49,8 +50,8 @@ export class GradeController {
     nextOrError: NextFunction
   ) => {
     // Generate Logic
-    const data: IComplements.CRUD = request.body;
-    const content = await this.gradeService.create(data);
+    const data: IComplements.CRUDImage = request.body;
+    const content = await this.schoolService.create(data);
     await this.returnData(response, nextOrError, content);
   };
 
@@ -62,8 +63,8 @@ export class GradeController {
     // Generate Logic
     // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
-    const data: IComplements.CRUD = request.body;
-    const content = await this.gradeService.update(id, data);
+    const data: IComplements.CRUDImage = request.body;
+    const content = await this.schoolService.update(id, data);
     await this.returnData(response, nextOrError, content);
   };
 
