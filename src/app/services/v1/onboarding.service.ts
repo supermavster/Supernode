@@ -3,9 +3,7 @@ import sha1 from 'crypto-js/sha1';
 import jwt from 'jsonwebtoken';
 import {Request} from 'express';
 import {v4 as uid} from 'uuid';
-import {OK, BAD_REQUEST, getStatusText} from 'http-status-codes';
 
-import {CODE_OK, CODE_ERROR} from '../../../resources/constants/codes.constant';
 import config from '../../../config';
 import {
   UserTokenRepository,
@@ -69,7 +67,7 @@ export class OnboardingService {
       updated: false
     };
     // Create Object and return Token
-    await new UserTokenRepository().createUserToken(authTokenDTO);
+    await new UserTokenRepository().create(authTokenDTO);
     return authToken;
   };
 
@@ -98,7 +96,7 @@ export class OnboardingService {
         ) {
           return errorObject;
         }
-        const userExists = await new UserTokenRepository().userToken({
+        const userExists = await new UserTokenRepository().index({
           uid: decoded.data.user.uid,
           authToken: header
         });
@@ -123,7 +121,7 @@ export class OnboardingService {
   signUp = async (userSignUpDTO: IUser.SignUpDTO) => {
     // Check if User Exist
     const usersRepository = new UsersRepository();
-    const userExists = await usersRepository.user({
+    const userExists = await usersRepository.index({
       email: userSignUpDTO.email
     });
 
@@ -150,7 +148,7 @@ export class OnboardingService {
       status: 'inactive'
     };
 
-    const userRecord = await usersRepository.createUsers(userSignUpDTO);
+    const userRecord = await usersRepository.create(userSignUpDTO);
     if (!userRecord) {
       return {
         status: false,
@@ -169,7 +167,7 @@ export class OnboardingService {
   confirmEmail = async (uid: string) => {
     // Check if User Exist
     const usersRepository = new UsersRepository();
-    const userExists = await usersRepository.user({
+    const userExists = await usersRepository.index({
       uid
     });
 
@@ -180,7 +178,7 @@ export class OnboardingService {
       };
     }
 
-    const userRecord = await usersRepository.updateUser(
+    const userRecord = await usersRepository.update(
       {checkUserId: 2, status: 'active'},
       {uid}
     );
@@ -198,7 +196,7 @@ export class OnboardingService {
     // Check if User Exist
     const passwordResetRepository = new PasswordResetRepository();
     const usersRepository = new UsersRepository();
-    const userExists = await usersRepository.user({
+    const userExists = await usersRepository.index({
       email
     });
 
@@ -211,9 +209,9 @@ export class OnboardingService {
     // Logic
     // eslint-disable-next-line no-shadow
     const uid = userExists.get('uid');
-    await passwordResetRepository.destroyPasswordReset({uid});
+    await passwordResetRepository.destroy({uid});
     const code = this.getRndInteger(1000, 9999);
-    const userRecord = await passwordResetRepository.createPasswordReset({
+    const userRecord = await passwordResetRepository.create({
       code,
       uid
     });
@@ -234,7 +232,7 @@ export class OnboardingService {
   checkCode = async (code: string) => {
     // Check if User Exist
     const passwordResetRepository = new PasswordResetRepository();
-    const codeExist = await passwordResetRepository.passwordReset({
+    const codeExist = await passwordResetRepository.index({
       code
     });
     if (!codeExist) {
@@ -254,7 +252,7 @@ export class OnboardingService {
     const passwordResetRepository = new PasswordResetRepository();
     const usersRepository = new UsersRepository();
     const code = IUserRecoveryDTO.code;
-    const codeExist = await passwordResetRepository.passwordReset({
+    const codeExist = await passwordResetRepository.index({
       code
     });
     if (!codeExist) {
@@ -270,22 +268,22 @@ export class OnboardingService {
       ? sha1(IUserRecoveryDTO.password).toString()
       : null;
 
-    const userRecord = await usersRepository.updateUser(
+    const userRecord = await usersRepository.update(
       {password: hashedPassword, checkUserId: 2, status: 'active'},
-      {uid}
+      uid
     );
 
     // Remode data
-    await passwordResetRepository.destroyPasswordReset({code});
+    await passwordResetRepository.destroy({code});
     return {
       status: true,
       message: lang.Onboarding.RECOVERY.CHANGE_PASSWORD
     };
   };
 
-  login = async (userSignInDTO: IUser.SignInDTO) => {
+  login = async (userSignInDTO: IUser.SignInDTO, route: string = 'users') => {
     // Check if User Exist
-    const user: any = await new UsersRepository().user({
+    const user: any = await new UsersRepository().index({
       email: userSignInDTO.email
     });
     if (!user) {
@@ -328,7 +326,7 @@ export class OnboardingService {
     user.setDataValue('authToken', authToken);
     user.setDataValue(
       'photo',
-      `${config.BASE_URL}/users/${user.get('slug')}/0.jpg`
+      `${config.BASE_URL}/${route}/${user.get('slug')}/0.jpg`
     );
     return {
       status: true,

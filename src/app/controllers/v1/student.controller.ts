@@ -3,9 +3,9 @@ import {Request, Response, NextFunction} from 'express';
 import {OK, BAD_REQUEST, getStatusText} from 'http-status-codes';
 
 import {CODE_OK, CODE_ERROR} from '../../../resources/constants/codes.constant';
-import {StudentService} from '../../services';
+import {StudentService, OnboardingService} from '../../services';
 import {UploadAnyFiles} from '../../../utils/UploadFiles';
-import {IComplements} from '../../../resources/interfaces';
+import {IComplements, IStudent, IUser} from '../../../resources/interfaces';
 
 export class StudentController {
   private studentService = new StudentService();
@@ -77,6 +77,47 @@ export class StudentController {
     });
   };
 
+  signUp = async (
+    request: Request,
+    response: Response,
+    nextOrError: NextFunction
+  ) => {
+    // Context Base
+    const data: IStudent.SignUpDTO = request.body;
+    const dataOnboarding: IUser.SignUpDTO = request.body;
+    dataOnboarding.fullName = `${data.name} ${data.lastName}`;
+    await new OnboardingService()
+      .signUp(dataOnboarding)
+      .then(async (res) => {
+        data!.uid = res.data!.uid;
+        const content = await this.studentService.create(data);
+        content.data!.slug = res.data!.slug;
+        await this.returnData(response, nextOrError, content, {
+          upload: true,
+          router: 'users/students',
+          files: request.files
+        });
+      })
+      .catch(async (err) => {
+        await this.returnData(response, nextOrError, err);
+      });
+    // await this.mailer.SendWelcomeEmail(body);
+  };
+
+  login = async (
+    request: Request,
+    response: Response,
+    nextOrError: NextFunction
+  ) => {
+    // Context Base
+    const dataOnboarding: IUser.SignInDTO = request.body;
+    const content = await new OnboardingService().login(
+      dataOnboarding,
+      'users/students'
+    );
+    await this.returnData(response, nextOrError, content);
+  };
+
   private returnData(
     response: Response,
     nextOrError: NextFunction,
@@ -101,7 +142,7 @@ export class StudentController {
     }
 
     const message = content.message;
-    if (typeof content.data !== 'undefined') {
+    if (typeof content.data !== 'undefined' && codeResponse === OK) {
       body = content.data;
       if (
         typeof body.slug !== 'undefined' &&

@@ -126,6 +126,219 @@
           "application/json"
         ]
       }
+    },
+    "/school": {
+      "get": {
+        "tags": [
+          "school"
+        ],
+        "description": "Generate Services - SCHOOL - GET",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "tags": [
+          "school"
+        ],
+        "description": "Generate Services - SCHOOL - POST",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/school/:id": {
+      "get": {
+        "tags": [
+          "school"
+        ],
+        "description": "Generate Services - SCHOOL - GET",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "school"
+        ],
+        "description": "Generate Services - SCHOOL - PUT",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "school"
+        ],
+        "description": "Generate Services - SCHOOL - DELETE",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/city": {
+      "get": {
+        "tags": [
+          "city"
+        ],
+        "description": "Generate Services - CITY - GET",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "tags": [
+          "city"
+        ],
+        "description": "Generate Services - CITY - POST",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/city/:id": {
+      "get": {
+        "tags": [
+          "city"
+        ],
+        "description": "Generate Services - CITY - GET",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "city"
+        ],
+        "description": "Generate Services - CITY - PUT",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "city"
+        ],
+        "description": "Generate Services - CITY - DELETE",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/student/login": {
+      "post": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - POST",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/student/signup": {
+      "post": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - POST",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/student/confirm-email/:uid": {
+      "get": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - GET",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/student/recovery-password": {
+      "post": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - POST",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/student/check-code": {
+      "post": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - POST",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/student/change-password": {
+      "post": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - POST",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/student": {
+      "get": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - GET",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - POST",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/student/:id": {
+      "get": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - GET",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - PUT",
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "student"
+        ],
+        "description": "Generate Services - STUDENT - DELETE",
+        "produces": [
+          "application/json"
+        ]
+      }
     }
   },
   "info": {

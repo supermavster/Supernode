@@ -19,19 +19,10 @@ export class UserClient extends Model<UserClient> {
   uid!: string;
 
   @Column(DataType.STRING)
-  slug!: string;
+  name!: string;
 
   @Column(DataType.STRING)
-  fullName!: string;
-
-  @Column(DataType.STRING)
-  email!: string;
-
-  @Column(DataType.STRING)
-  phone!: string;
-
-  @Column(DataType.STRING)
-  password!: string;
+  lastName!: string;
 
   @ForeignKey(() => CheckUser)
   @Column(DataType.INTEGER)

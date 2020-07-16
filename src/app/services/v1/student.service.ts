@@ -2,7 +2,7 @@ import sha1 from 'crypto-js/sha1';
 
 import config from '../../../config';
 import {StudentRepository} from '../../repository';
-import {IComplements} from '../../../resources/interfaces';
+import {IComplements, IStudent} from '../../../resources/interfaces';
 // Language
 const language = `../../../resources/lang/${config.LANGUAGE}`;
 const lang = require(language);
@@ -53,8 +53,7 @@ export class StudentService {
     };
   };
 
-  create = async (request: IComplements.CRUDImage) => {
-    request.slug = sha1(request.name.toString().trim()).toString();
+  create = async (request: IStudent.SignUpDTO | IComplements.CRUDImage) => {
     const data = await this.studentRepository.create(request);
     if (typeof data === 'undefined' || !data) {
       return {
