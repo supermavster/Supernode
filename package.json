@@ -5,6 +5,7 @@
   "main": "src/server.ts",
   "author": "Miguel Ángel Torres Vargas <ingeniero.miguelvargas@gmail.com>",
   "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon",
     "clean": "del-cli --dot=true \"./dist/**/*\" && yarn clean:code",
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check -- --watch",
@@ -15,7 +16,7 @@
     "build:all": "yarn clean && yarn build:types && yarn build:js",
     "build:types": "cross-env NODE_ENV=production tsc --emitDeclarationOnly",
     "build:js": "cross-env NODE_ENV=production babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
-    "start": "NODE_ENV=production npx sequelize-cli db:migrate && NODE_ENV=production npx sequelize-cli db:seed:all && NODE_ENV=production babel-node -x \".ts\" src/server.ts",
+    "start": "NODE_ENV=development babel-node -x \".ts\" src/server.ts",
     "clean:code": "yarn prettier:format && yarn lint:fix",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint --ext .ts,.js --fix --ignore-path .gitignore",
@@ -23,9 +24,10 @@
     "prettier:format": "prettier --ignore-path .prettierignore --config .prettierrc \"**/*.{js,ts,json,yml,yaml}\" --write",
     "prettier:watch": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
     "server": "ts-node-dev --respawn --transpileOnly ./src/server.ts               ",
-    "serve:production-local": "cross-env NODE_ENV=production node server.js",
     "serve:kill": "pm2 kill || pm2 list || pm2 stop server.js",
-    "serve:production": "npm run serve:kill && cross-env NODE_ENV=production pm2 start server.js"
+    "serve:production": "npm run serve:kill && cross-env NODE_ENV=production pm2 start server.js",
+    "migration": "cross-env NODE_ENV=production npx sequelize-cli db:migrate",
+    "seed": "cross-env NODE_ENV=production npx sequelize-cli db:seed:all"
   },
   "husky": {
     "hooks": {

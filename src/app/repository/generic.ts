@@ -4,12 +4,20 @@ type T = any;
 
 export class Repository {
   model: any;
-  index = (where?: WhereAttributeHash): Promise<T> => {
-    return this.model.findOne({where});
+  index = (
+    where?: WhereAttributeHash,
+    order?: String[],
+    attributes?: String[]
+  ): Promise<T> => {
+    return this.model.findOne({where}, order, attributes);
   };
 
-  all = (where?: WhereAttributeHash): Promise<T[]> => {
-    return this.model.findAll({where});
+  all = (
+    where?: WhereAttributeHash,
+    order?: String[],
+    attributes?: String[]
+  ): Promise<T> => {
+    return this.model.findAll({where}, order, attributes);
   };
 
   create = (data?: Object): Promise<T> => {

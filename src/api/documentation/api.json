@@ -207,6 +207,93 @@
         "description": "Generate Services - STUDENT - DELETE",
         "produces": ["application/json"]
       }
+    },
+    "/sustainable": {
+      "get": {
+        "tags": ["sustainable"],
+        "description": "Generate Services - SUSTAINABLE - GET",
+        "produces": ["application/json"]
+      },
+      "post": {
+        "tags": ["sustainable"],
+        "description": "Generate Services - SUSTAINABLE - POST",
+        "produces": ["application/json"]
+      }
+    },
+    "/sustainable/:id": {
+      "get": {
+        "tags": ["sustainable"],
+        "description": "Generate Services - SUSTAINABLE - GET",
+        "produces": ["application/json"]
+      },
+      "put": {
+        "tags": ["sustainable"],
+        "description": "Generate Services - SUSTAINABLE - PUT",
+        "produces": ["application/json"]
+      },
+      "delete": {
+        "tags": ["sustainable"],
+        "description": "Generate Services - SUSTAINABLE - DELETE",
+        "produces": ["application/json"]
+      }
+    },
+    "/category": {
+      "get": {
+        "tags": ["category"],
+        "description": "Generate Services - CATEGORY - GET",
+        "produces": ["application/json"]
+      },
+      "post": {
+        "tags": ["category"],
+        "description": "Generate Services - CATEGORY - POST",
+        "produces": ["application/json"]
+      }
+    },
+    "/category/:id": {
+      "get": {
+        "tags": ["category"],
+        "description": "Generate Services - CATEGORY - GET",
+        "produces": ["application/json"]
+      },
+      "put": {
+        "tags": ["category"],
+        "description": "Generate Services - CATEGORY - PUT",
+        "produces": ["application/json"]
+      },
+      "delete": {
+        "tags": ["category"],
+        "description": "Generate Services - CATEGORY - DELETE",
+        "produces": ["application/json"]
+      }
+    },
+    "/content": {
+      "get": {
+        "tags": ["content"],
+        "description": "Generate Services - CONTENT - GET",
+        "produces": ["application/json"]
+      },
+      "post": {
+        "tags": ["content"],
+        "description": "Generate Services - CONTENT - POST",
+        "produces": ["application/json"]
+      }
+    },
+    "/content/:id": {
+      "get": {
+        "tags": ["content"],
+        "description": "Generate Services - CONTENT - GET",
+        "produces": ["application/json"]
+      },
+      "put": {
+        "tags": ["content"],
+        "description": "Generate Services - CONTENT - PUT",
+        "produces": ["application/json"]
+      },
+      "delete": {
+        "tags": ["content"],
+        "description": "Generate Services - CONTENT - DELETE",
+        "produces": ["application/json"]
+      }
     }
   },
   "info": {

@@ -11,6 +11,8 @@ const DatabaseConfig = require('./database');
 DotenvFlow.config({path: './environment'});
 
 let database = {};
+// eslint-disable-next-line no-console
+console.log(process.env);
 const processEnv = process.env.ENV || 'development';
 switch (processEnv) {
   case 'development':

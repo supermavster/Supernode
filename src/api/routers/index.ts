@@ -9,7 +9,9 @@ import GradeRouter from './grade.router';
 import SchoolRouter from './school.router';
 import CityRouter from './city.router';
 import StudentRouter from './student.router';
-// // import UserRouter from './user.router';
+import SustainableRouter from './sustainable.router';
+import CategoryRouter from './category.router';
+import ContentRouter from './content.router';
 
 // // const listEndpoints = require('express-list-endpoints');
 
@@ -22,6 +24,9 @@ apiRouter.use('/grade', GradeRouter);
 apiRouter.use('/school', SchoolRouter);
 apiRouter.use('/city', CityRouter);
 apiRouter.use('/student', StudentRouter);
+apiRouter.use('/sustainable', SustainableRouter);
+apiRouter.use('/category', CategoryRouter);
+apiRouter.use('/content', ContentRouter);
 // // apiRouter.use('/users', UserRouter);
 
 // Exception
