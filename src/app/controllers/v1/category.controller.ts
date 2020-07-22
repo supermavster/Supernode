@@ -1,12 +1,12 @@
 import {Request, Response, NextFunction} from 'express';
 
-import {GradeService} from '../../services';
+import {CategoryService} from '../../services';
 import {IComplements} from '../../../resources/interfaces';
 import {ComplementResponse} from '../generic';
 
-export class GradeController {
+export class CategoryController {
   private complementResponse = new ComplementResponse();
-  private gradeService = new GradeService();
+  private categoryService = new CategoryService();
   //   'all' | 'get' | 'post' | 'put' | 'delete' | 'patch' | 'options' | 'head' = any> {
   all = async (
     _request: Request,
@@ -14,7 +14,7 @@ export class GradeController {
     nextOrError: NextFunction
   ) => {
     // Generate Logic
-    const content = await this.gradeService.all();
+    const content = await this.categoryService.all();
     await this.complementResponse.returnData(response, nextOrError, content);
   };
 
@@ -26,7 +26,7 @@ export class GradeController {
     // Generate Logic
     // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
-    const content = await this.gradeService.index(id);
+    const content = await this.categoryService.index(id);
     await this.complementResponse.returnData(response, nextOrError, content);
   };
 
@@ -38,7 +38,7 @@ export class GradeController {
     // Generate Logic
     // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
-    const content = await this.gradeService.remove(id);
+    const content = await this.categoryService.remove(id);
     await this.complementResponse.returnData(response, nextOrError, content);
   };
 
@@ -49,7 +49,7 @@ export class GradeController {
   ) => {
     // Generate Logic
     const data: IComplements.CRUD = request.body;
-    const content = await this.gradeService.create(data);
+    const content = await this.categoryService.create(data);
     await this.complementResponse.returnData(response, nextOrError, content);
   };
 
@@ -62,7 +62,7 @@ export class GradeController {
     // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
     const data: IComplements.CRUD = request.body;
-    const content = await this.gradeService.update(id, data);
+    const content = await this.categoryService.update(id, data);
     await this.complementResponse.returnData(response, nextOrError, content);
   };
 }

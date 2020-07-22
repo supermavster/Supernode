@@ -1,20 +1,20 @@
 import {Request, Response, NextFunction} from 'express';
 
-import {GradeService} from '../../services';
+import {SustainableService} from '../../services';
 import {IComplements} from '../../../resources/interfaces';
 import {ComplementResponse} from '../generic';
 
-export class GradeController {
+export class SustainableController {
+  private sustainableService = new SustainableService();
   private complementResponse = new ComplementResponse();
-  private gradeService = new GradeService();
   //   'all' | 'get' | 'post' | 'put' | 'delete' | 'patch' | 'options' | 'head' = any> {
   all = async (
-    _request: Request,
+    request: Request,
     response: Response,
     nextOrError: NextFunction
   ) => {
     // Generate Logic
-    const content = await this.gradeService.all();
+    const content = await this.sustainableService.all();
     await this.complementResponse.returnData(response, nextOrError, content);
   };
 
@@ -26,7 +26,7 @@ export class GradeController {
     // Generate Logic
     // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
-    const content = await this.gradeService.index(id);
+    const content = await this.sustainableService.index(id);
     await this.complementResponse.returnData(response, nextOrError, content);
   };
 
@@ -38,7 +38,7 @@ export class GradeController {
     // Generate Logic
     // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
-    const content = await this.gradeService.remove(id);
+    const content = await this.sustainableService.remove(id);
     await this.complementResponse.returnData(response, nextOrError, content);
   };
 
@@ -48,9 +48,13 @@ export class GradeController {
     nextOrError: NextFunction
   ) => {
     // Generate Logic
-    const data: IComplements.CRUD = request.body;
-    const content = await this.gradeService.create(data);
-    await this.complementResponse.returnData(response, nextOrError, content);
+    const data: IComplements.CRUDImage = request.body;
+    const content = await this.sustainableService.create(data);
+    await this.complementResponse.returnData(response, nextOrError, content, {
+      upload: true,
+      router: 'sustainables',
+      files: request.files
+    });
   };
 
   update = async (
@@ -61,8 +65,13 @@ export class GradeController {
     // Generate Logic
     // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
-    const data: IComplements.CRUD = request.body;
-    const content = await this.gradeService.update(id, data);
-    await this.complementResponse.returnData(response, nextOrError, content);
+    const data: IComplements.CRUDImage = request.body;
+    const content = await this.sustainableService.update(id, data);
+    await this.complementResponse.returnData(response, nextOrError, content, {
+      upload: true,
+      router: 'sustainables',
+      files: request.files,
+      update: true
+    });
   };
 }

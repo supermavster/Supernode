@@ -23,7 +23,7 @@ export class OnboardingService {
     const accessToken: string = jwt.sign({data: payload}, this.signature(), {
       expiresIn: '1y'
     });
-    return {accessToken};
+    return {status: true, data: {accessToken}};
   };
 
   checkAccessToken = async (request: Request) => {
@@ -52,26 +52,38 @@ export class OnboardingService {
   };
 
   generateAuthToken = async (user: IUser.AuthTokenDTO) => {
-    const payload = {
-      iat: moment().unix(),
-      user
-    };
-    const authToken = jwt.sign({data: payload}, this.signature(), {
-      expiresIn: '1y'
-    });
-    const date = new Date();
-    const authTokenDTO: IUser.AuthDTO = {
-      ...user,
-      authToken,
-      maxDate: new Date(date.setFullYear(date.getFullYear() + 1)),
-      updated: false
-    };
+    let authToken: any;
     // Create Object and return Token
-    await new UserTokenRepository().create(authTokenDTO);
+    // eslint-disable-next-line no-shadow
+    const uid = user.uid;
+    if (uid) {
+      const userExists = await new UserTokenRepository().index({
+        uid
+      });
+      if (userExists.dataValues.authToken) {
+        authToken = userExists.dataValues.authToken;
+      } else {
+        const payload = {
+          iat: moment().unix(),
+          user
+        };
+        authToken = jwt.sign({data: payload}, this.signature(), {
+          expiresIn: '1y'
+        });
+      }
+      const date = new Date();
+      const authTokenDTO: IUser.AuthDTO = {
+        ...user,
+        authToken,
+        maxDate: new Date(date.setFullYear(date.getFullYear() + 1)),
+        updated: false
+      };
+      await new UserTokenRepository().create(authTokenDTO);
+    }
     return authToken;
   };
 
-  checkAuthToken = (request: Request) => {
+  checkAuthToken = async (request: Request, getData?: Boolean) => {
     const header =
       request.header(`X-${config.SHORT_NAME}-Auth-Token`) || 'ERROR';
 
@@ -83,32 +95,43 @@ export class OnboardingService {
     }
 
     try {
-      // eslint-disable-next-line consistent-return
-      jwt.verify(header, this.signature(), async (err, decoded: any) => {
-        const errorObject = {
-          status: false,
-          message: lang.Onboarding.USER.ERROR.NOT_FOUND_TOKEN
-        };
+      return await jwt.verify(
+        header,
+        this.signature(),
+        async (err, decoded: any) => {
+          const errorObject = {
+            status: false,
+            message: lang.Onboarding.USER.ERROR.NOT_FOUND_TOKEN
+          };
 
-        if (
-          typeof decoded === 'undefined' ||
-          typeof decoded.data === 'undefined'
-        ) {
-          return errorObject;
-        }
-        const userExists = await new UserTokenRepository().index({
-          uid: decoded.data.user.uid,
-          authToken: header
-        });
+          if (
+            typeof decoded === 'undefined' ||
+            typeof decoded.data === 'undefined'
+          ) {
+            return errorObject;
+          }
+          const userExists = await new UserTokenRepository().index({
+            // uid: decoded.data.user.uid,
+            authToken: header
+          });
+          // // eslint-disable-next-line no-console
+          // console.log(userExists, header, decoded.data.user.uid);
+          if (!userExists) {
+            return errorObject;
+          }
 
-        if (!userExists) {
-          return errorObject;
+          if (typeof getData === 'undefined' && getData) {
+            return {
+              status: true,
+              data: userExists
+            };
+          }
+          return {
+            status: true,
+            message: lang.Onboarding.AUTH_TOKEN.MAKE
+          };
         }
-      });
-      return {
-        status: true,
-        message: lang.Onboarding.AUTH_TOKEN.MAKE
-      };
+      );
     } catch (error) {
       return {
         status: false,
@@ -282,6 +305,12 @@ export class OnboardingService {
   };
 
   login = async (userSignInDTO: IUser.SignInDTO, route: string = 'users') => {
+    if (!userSignInDTO.email) {
+      return {
+        status: false,
+        message: lang.Onboarding.SIGNIN.ERROR.SIGNIN
+      };
+    }
     // Check if User Exist
     const user: any = await new UsersRepository().index({
       email: userSignInDTO.email
@@ -333,6 +362,11 @@ export class OnboardingService {
       message: lang.Onboarding.SIGNIN.SUCCESS,
       data: user as IUser.SigInDTO
     };
+  };
+
+  profile = async (request: Request) => {
+    const data = await this.checkAuthToken(request, true);
+    return data;
   };
 
   private getRndInteger(min: number, max: number) {

@@ -1,7 +1,7 @@
 import {Router} from 'express';
 
 import {OnboardingController} from '../../app/controllers';
-import {accessTokenMiddleware} from '../middlewares';
+import {accessTokenMiddleware, authTokenMiddleware} from '../middlewares';
 
 const router = Router();
 
@@ -26,5 +26,6 @@ router.post(
   accessTokenMiddleware,
   onboardingController.changePassword
 );
+router.get('/profile', authTokenMiddleware, onboardingController.profile);
 
 export default router;

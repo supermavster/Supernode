@@ -2,5 +2,5 @@
   "watch": ["src"],
   "ext": ".ts,.js",
   "ignore": [],
-  "exec": "ts-node ./src/server.ts"
+  "exec": "babel-node -x \".ts\" src/server.ts"
 }

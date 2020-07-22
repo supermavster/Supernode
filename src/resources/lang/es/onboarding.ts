@@ -35,7 +35,8 @@ export default {
     ERROR: {
       PASSWORD: 'Conterasenia Incorrecta',
       VERIFY_EMAIL: 'El correo debe ser verificado para proseguir',
-      INACTIVE: 'El usuario ha sido desactivado'
+      INACTIVE: 'El usuario ha sido desactivado',
+      EMAIL: 'El correo no existe'
     }
   },
 

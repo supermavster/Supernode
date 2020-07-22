@@ -8,6 +8,8 @@ import _ from 'lodash';
 import {FormatData} from '../utils/FormatData';
 
 const pathYaml = path.join(__dirname, '../api/documentation/api.client.yaml');
+// eslint-disable-next-line no-console
+console.log(pathYaml);
 const swaggerDocument = YAML.load(pathYaml);
 
 export class ApiDocApp {
