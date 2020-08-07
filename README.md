@@ -45,6 +45,7 @@ Este proyecto fue creado usando las siguientes tecnologias:
 - Swagger
 - Jest (in progress)
 
+![](../images/star-fork.png)
 ## Installation
 Sigue los siguientes pasos para utilizar y construir tus proyectos con base en este stack:
 
