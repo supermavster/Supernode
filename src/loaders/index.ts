@@ -21,10 +21,13 @@ export class Server {
 
   serverListen = (): Http.Server => {
     const {PORT: port, HOST: host} = config;
+    // eslint-disable-next-line no-console
+    console.log(`Server run in: http://${host}:${port}`);
     return this.httpServer.listen(port, (): void => {});
   };
 
   serverErrorHandler = (error: Error): void => {
+    // eslint-disable-next-line no-console
     console.error('Server run error: ', error.message);
   };
 

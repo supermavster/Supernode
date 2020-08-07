@@ -63,6 +63,18 @@ Creación del gestor de base de datos e inclusivde ejecución de Node.
 
 Para la configuración de la instalación del mismo, debemos configurar los environments e instalar dependencias, para que podamos ejecutar el stack.
 
+
+## Instalación de Dependencias
+
+Ahora necesitamos instalar las dependencias del proyecto, utilizando alguno de los siguientes comandos:
+```shell
+$ npm install
+```
+or
+```shell
+$ yarn install
+```
+
 ## Configuración
 Necesitas añadir las variables de entorno, las cuales nos permitiran conectarnos a las bases de datos ofrecidas por Sequelize, al igual toda credencial que tengamos.
 
@@ -70,9 +82,7 @@ Para esto un ejemplo de un archivo env en la carpeta `environment`; más especif
 
 ```shell
 $ cd environment
-$ cp .env.example .env.local
-$ cp .env.example .env.development
-$ cp .env.example .env.production
+$ cp .env.example .env.local && cp .env.example .env.development && cp .env.example .env.production
 ```
 Un ejemplo base del archivo `.env.development` seria:
 
@@ -108,32 +118,12 @@ GMAIL_USER_NAME=correo@gmail.com
 GMAIL_USER_PASSWORD=secret
 ```
 
-## Instalación de Dependencias
-
-Ahora necesitamos instalar las dependencias del proyecto, utilizando alguno de los siguientes comandos:
-```shell
-$ npm install
-```
-or
-```shell
-$ yarn install
-```
 
 ## Ejecutar el APP
 **Warning! Debe de ejecutarse la base de datos antes de proseguir**
 
 Si utilizas **docker** te recomiendo que montes y ejecutes un volumen con mysql, más información: [Docker + MySQL (Tutorial)](https://platzi.com/tutoriales/1432-docker/3268-como-crear-un-contenedor-con-docker-mysql-y-persistir-la-informacion/), despues de crear el volumen ejecutar el id o nombre del contenedor: `docker start be04f0c06...`
 
-**Ejecución de Supernode**
-
-Solo ejecutar el comando:
-```shell
-$ npm run dev
-```
-o
-```shell
-$ yarn dev
-```
 ---
 **Ejemplos de uso:**
 
@@ -146,7 +136,12 @@ o
 ```shell
 $ yarn dev:local
 ```
+
+Dando como respuesta de servidor: http://localhost:5000/
+
 ---
+***Development***
+
 Un ejemplo ejecutado con las credenciales en `development`, seria:
 
 ```shell
@@ -156,6 +151,21 @@ o
 ```shell
 $ yarn dev:development
 ```
+
+O de manera corta, con la ejecución de `Nodemon`:
+
+```shell
+$ npm run dev
+```
+o
+```shell
+$ yarn dev
+```
+
+
+**Nota:** Configurar el archivo `.env.development` para la ejecución de este comando.
+
+
 ---
 Un ejemplo ejecutado con las credenciales en `production`, seria:
 
@@ -166,9 +176,12 @@ o
 ```shell
 $ yarn dev:production
 ```
+---
 
 La plantilla admite cuatro entornos, puede modificarlos desde pakcage.json > scripts
-npm install. Por ejemplo, ejecute la plantilla `npm run serve:local`, para ejecutar la aplicación utilizando el modo de entorno local.
+npm install. 
+
+Por ejemplo, ejecute la plantilla `npm run serve:local`, para ejecutar la aplicación utilizando el modo de entorno local.
 
 # Características 🎨
 - Ejemplo completo de llamada API (para que pueda rastrearlo y saber cómo funciona el ciclo de vida de la llamada API).
