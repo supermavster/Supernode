@@ -1,0 +1,86 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/ct/generate-access-token": {
+      "get": {
+        "tags": ["ct"],
+        "description": "Generate Services - CT - GET",
+        "produces": ["application/json"]
+      }
+    },
+    "/onboarding/signup": {
+      "post": {
+        "tags": ["onboarding"],
+        "description": "Generate Services - ONBOARDING - POST",
+        "produces": ["application/json"]
+      }
+    },
+    "/onboarding/login": {
+      "post": {
+        "tags": ["onboarding"],
+        "description": "Generate Services - ONBOARDING - POST",
+        "produces": ["application/json"]
+      }
+    },
+    "/onboarding/confirm-email/:uid": {
+      "get": {
+        "tags": ["onboarding"],
+        "description": "Generate Services - ONBOARDING - GET",
+        "produces": ["application/json"]
+      }
+    },
+    "/onboarding/recovery-password": {
+      "post": {
+        "tags": ["onboarding"],
+        "description": "Generate Services - ONBOARDING - POST",
+        "produces": ["application/json"]
+      }
+    },
+    "/onboarding/check-code": {
+      "post": {
+        "tags": ["onboarding"],
+        "description": "Generate Services - ONBOARDING - POST",
+        "produces": ["application/json"]
+      }
+    },
+    "/onboarding/change-password": {
+      "post": {
+        "tags": ["onboarding"],
+        "description": "Generate Services - ONBOARDING - POST",
+        "produces": ["application/json"]
+      }
+    },
+    "/onboarding/profile": {
+      "get": {
+        "tags": ["onboarding"],
+        "description": "Generate Services - ONBOARDING - GET",
+        "produces": ["application/json"]
+      }
+    }
+  },
+  "definitions": {},
+  "info": {
+    "title": "REST API",
+    "version": "1.0.0",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "description": "REST API for client",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "ingeniero.miguelvargas@gmail.com"
+    }
+  },
+  "host": "localhost:5000/",
+  "basePath": "api/v1",
+  "tags": [
+    {
+      "name": "Services",
+      "description": "User Services"
+    }
+  ],
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"]
+}
