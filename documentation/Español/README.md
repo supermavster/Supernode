@@ -183,6 +183,12 @@ npm install.
 
 Por ejemplo, ejecute la plantilla `npm run serve:local`, para ejecutar la aplicación utilizando el modo de entorno local.
 
+
+# Wiki 📖
+
+Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/supermavster/supernode/wiki)
+
+
 # Características 🎨
 - Ejemplo completo de llamada API (para que pueda rastrearlo y saber cómo funciona el ciclo de vida de la llamada API).
 - Uso de Typescript.
@@ -231,10 +237,6 @@ Este proyecto fue creado usando las siguientes tecnologias:
 - HTTP Status Code
 - Swagger
 - Jest (in progress)
-
-# Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/supermavster/supernode/wiki)
 
 # Versionado 📌
 
