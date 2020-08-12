@@ -70,22 +70,34 @@ export class OnboardingController {
     nextOrError: NextFunction
   ) => {
     // To send response
-    let body: any;
-    const data: IUser.SignUpDTO = request.body;
-    const content = await this.onboardingService
+    let data: IUser.SignUpDTO = request.body;
+    data.fullName = `${data.name} ${data.lastName}`;
+    await this.onboardingService
       .signUp(data)
-      // eslint-disable-next-line no-shadow
-      .then(async (content) => {
-        body = content.data;
+      .then(async (res) => {
+        data = {
+          ...data,
+          ...res.data
+        };
+        const content: any = await this.onboardingService.createClient(data);
+        content.data!.slug = data!.slug;
         // Send Email
-        await this.mailer.SendWelcomeEmail(body);
+        await this.mailer.SendWelcomeEmail(res.data);
+        // Add Files Data
+        await this.complementResponse.returnData(
+          response,
+          nextOrError,
+          content,
+          {
+            upload: true,
+            router: this.getRouterFile(),
+            files: request.files
+          }
+        );
+      })
+      .catch(async (err) => {
+        await this.complementResponse.returnData(response, nextOrError, err);
       });
-
-    await this.complementResponse.returnData(response, nextOrError, content, {
-      upload: true,
-      router: 'users',
-      files: request.files
-    });
   };
 
   confirmEmail = async (

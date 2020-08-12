@@ -9,6 +9,8 @@ export interface SigInDTO {
 }
 export interface SignUpDTO {
   uid: string;
+  name: string;
+  lastName: string;
   fullName: string;
   email: string;
   phone: string;

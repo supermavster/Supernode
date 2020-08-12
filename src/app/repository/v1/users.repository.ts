@@ -18,6 +18,10 @@ export class UsersRepository extends Repository {
     return response;
   };
 
+  createClient = (data?: Object): Promise<any> => {
+    return UserClient.create(data);
+  };
+
   // Status
   changeCheckUserUID = async (
     uid: string,

@@ -10,7 +10,7 @@ import {
   UsersRepository,
   PasswordResetRepository
 } from '../../repository';
-import {IUser} from '../../../resources/interfaces';
+import {IUser, IComplements} from '../../../resources/interfaces';
 // Language
 const language = `../../../resources/lang/${config.LANGUAGE}`;
 const lang = require(language);
@@ -174,7 +174,7 @@ export class OnboardingService {
     };
     // Make User
     const userRecord = await this.usersRepository.create(data);
-    if (!userRecord) {
+    if (this.usersRepository.isEmpty(userRecord)) {
       return {
         status: false,
         message: lang.Onboarding.SIGNUP.ERROR.MAKE_USER
@@ -185,6 +185,21 @@ export class OnboardingService {
       status: true,
       data,
       message: lang.Onboarding.SIGNUP.MAKE_USER
+    };
+  };
+
+  createClient = async (request: IUser.SignUpDTO | IComplements.CRUDImage) => {
+    const data = await this.usersRepository.createClient(request);
+    if (this.usersRepository.isEmpty(data)) {
+      return {
+        status: false,
+        message: lang.STACK.CRUD.ERROR.MAKE
+      };
+    }
+    return {
+      status: true,
+      data: request,
+      message: lang.STACK.CRUD.MAKE
     };
   };
 
