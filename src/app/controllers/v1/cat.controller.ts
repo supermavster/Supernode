@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
 
 import {CatService} from '../../services';
-import {IComplements} from '../../../resources/interfaces';
+import {IComplements, ICat} from '../../../resources/interfaces';
 import {ComplementResponse} from '../generic';
 
 export class CatController {
@@ -26,7 +26,7 @@ export class CatController {
   ) => {
     // Generate Logic
     const params: any = request.params;
-    const filter: IComplements.FILTER = params;
+    const filter: ICat.FILTER = params;
     const content: any = await this.catService.contentPagination(filter);
     // Add Files Data
     await this.complementResponse.returnData(response, nextOrError, content, {
@@ -88,6 +88,8 @@ export class CatController {
     response: Response,
     nextOrError: NextFunction
   ) => {
+    // Generate Logic
+    // eslint-disable-next-line radix
     const id: IComplements.ID = {id: parseInt(request.params.id)};
     const content = await this.catService.deactivate(id);
     await this.complementResponse.returnData(response, nextOrError, content);

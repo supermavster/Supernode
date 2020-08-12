@@ -87,6 +87,11 @@ export class Repository {
     return this.model.update(data, {where});
   };
 
+  deactivate = (where: WhereAttributeHash): Promise<T> => {
+    // @ts-ignore
+    return this.model.update({status: 'inactive'}, {where});
+  };
+
   destroy = async (where?: WhereAttributeHash) => {
     // @ts-ignore
     await this.model.destroy({where});

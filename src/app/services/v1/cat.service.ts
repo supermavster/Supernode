@@ -1,6 +1,6 @@
 import config from '../../../config';
 import {CatRepository} from '../../repository';
-import {IComplements} from '../../../resources/interfaces';
+import {IComplements, ICat} from '../../../resources/interfaces';
 // Language
 const language = `../../../resources/lang/${config.LANGUAGE}`;
 const lang = require(language);
@@ -25,7 +25,7 @@ export class CatService {
     };
   };
 
-  contentPagination = async (filter: IComplements.FILTER) => {
+  contentPagination = async (filter: ICat.FILTER) => {
     const data: any = await this.catRepository.contentPagination(filter);
     // Check if Exist
     if (this.catRepository.isEmpty(data.data)) {
@@ -111,7 +111,7 @@ export class CatService {
     }
     return {
       status: true,
-      data: request,
+      data,
       message: lang.STACK.CRUD.DEACTIVATE
     };
   };
