@@ -88,7 +88,7 @@ export class CatController {
     response: Response,
     nextOrError: NextFunction
   ) => {
-    const id: IComplements.ID = request.params;
+    const id: IComplements.ID = {id: parseInt(request.params.id)};
     const content = await this.catService.deactivate(id);
     await this.complementResponse.returnData(response, nextOrError, content);
   };

@@ -3,5 +3,5 @@ export interface FILTER {
   limit: number;
   offset: number;
   catId: number;
-  search: string;
+  search?: string;
 }
