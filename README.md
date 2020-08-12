@@ -193,6 +193,9 @@ npm install.
 
 Por ejemplo, ejecute la plantilla `npm run serve:local`, para ejecutar la aplicación utilizando el modo de entorno local.
 
+---
+
+Para los servicios dirigete a la carpeta endpoints e importa dicho JSON en INSOMNIA
 
 # Wiki 📖
 
