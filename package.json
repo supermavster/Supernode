@@ -20,7 +20,7 @@
     "serve:killtemp": "pm2 kill || pm2 list || pm2 stop server.js",
     "serve:kill": "pm2 list || pm2 stop PROJECT-api",
     "serve:production": "cross-env NODE_ENV=production pm2 start -n 'PROJECT-api' server.js",
-    "config:public": "cp ./public ./dist/",
+    "config:public": "mv ./public ./dist/",
     "config:sh": "cp ./base.sh ./dist/",
     "config:doc": "mkdir ./dist/api/documentation/ && cp ./src/api/documentation/api.client.yaml -d ./dist/api/documentation/",
     "config:package": "cp package.json ./dist/",
