@@ -57,6 +57,7 @@ export default {
     // @ts-ignore
     `${database.dialect}://${database.username}:${database.password}@${database.host}:${database.port}/${database.database}` ||
     '',
+  SENTRY_INSTALL: process.env.SENTRY_INSTALL || false,
   SENTRY_CONSOLE: process.env.SENTRY_CONSOLE || false,
   SENTRY_DSN: process.env.SENTRY_DSN || ''
 };
