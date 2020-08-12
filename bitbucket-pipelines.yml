@@ -56,7 +56,7 @@ pipelines:
           name: Build
           caches:
             - node
-          deployment: test
+          deployment: production
           script:
             - chmod 777 ./base.sh
             - sed -i "s/PROJECT/${PROJECT}/g" ./base.sh
