@@ -11,11 +11,11 @@ const catController = new CatController();
 router.get('/', accessTokenMiddleware, catController.all);
 // Pagination
 router.get(
-    '/:filter/:limit/:offset',
-    accessTokenMiddleware,
-    catController.contentPagination
-  );
-  
+  '/:filter/:limit/:offset',
+  accessTokenMiddleware,
+  catController.contentPagination
+);
+
 router.get('/:id', accessTokenMiddleware, catController.get);
 router.post('/', accessTokenMiddleware, catController.create);
 router.put('/:id', accessTokenMiddleware, catController.update);

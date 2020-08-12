@@ -2,7 +2,7 @@ import {Op} from 'sequelize';
 
 import {Repository} from '../generic';
 import {Cat} from '../../models/Cat';
-import { IComplements, ICat } from '../../../resources/interfaces';
+import {IComplements, ICat} from '../../../resources/interfaces';
 // export
 export class CatRepository extends Repository {
   allActive = async () => {
@@ -12,7 +12,6 @@ export class CatRepository extends Repository {
     return reponse;
   };
 
-  
   contentPagination = async (filter: ICat.FILTER) => {
     const tempFilter: IComplements.FILTER = {...filter};
     switch (filter.filter) {
@@ -43,12 +42,11 @@ export class CatRepository extends Repository {
     Object.assign(where, filter.conditions);
     const response = await this.content(filter.offset, filter.limit, {
       where,
-      order: [['createdAt', 'DESC']],
+      order: [['createdAt', 'DESC']]
       // include: [Category, Sustainable, UserClient]
     });
     return response;
   };
-
 
   constructor() {
     super();

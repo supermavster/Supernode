@@ -8,8 +8,7 @@ import config from '../../../config';
 import {
   UserTokenRepository,
   UsersRepository,
-  PasswordResetRepository,
-  StudentRepository
+  PasswordResetRepository
 } from '../../repository';
 import {IUser} from '../../../resources/interfaces';
 // Language
