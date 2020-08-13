@@ -81,8 +81,6 @@ export class ComplementResponse {
         images.singleFile !== null
       ) {
         const file: any = uploadAnyFiles.getFile(slug);
-        // eslint-disable-next-line no-console
-        console.log(file, slug);
         if (typeof file !== 'undefined' && file !== null) {
           // eslint-disable-next-line no-param-reassign
           body.dataValues.file = file;
@@ -104,6 +102,7 @@ export class ComplementResponse {
           listAll?: boolean;
           singleFile?: boolean;
           pagination?: boolean;
+          recursive?: Array<string>;
         }
       | undefined = undefined,
     middleware: boolean = false
@@ -134,14 +133,7 @@ export class ComplementResponse {
         typeof images.pagination !== 'undefined'
       ) {
         body = body.data;
-      }
-
-      if (Array.isArray(body)) {
-        body.forEach((element: any) => {
-          this.singleFile(element, images);
-        });
-      } else {
-        this.singleFile(body, images);
+        this.filterFiles(body, images);
       }
     }
 
@@ -160,5 +152,33 @@ export class ComplementResponse {
     ) {
       nextOrError(Boom.badRequest(message));
     }
+  }
+
+  filterFiles(body: any, images: any) {
+    if (Array.isArray(body)) {
+      body.forEach((element: any) => {
+        this.singleFile(element, images);
+        if (typeof images.recursive !== 'undefined') {
+          this.recursiveData(images.recursive, element, images);
+        }
+      });
+    } else {
+      this.singleFile(body, images);
+    }
+  }
+
+  recursiveData(recursive: any, element: any, images: any) {
+    recursive.forEach((item: any) => {
+      if (Array.isArray(item)) {
+        this.recursiveData(item, element.get(item), images);
+      } else {
+        // eslint-disable-next-line no-console
+        console.info('Recursive: ', item);
+        // Data Complement
+        if (element.get(item)) {
+          this.filterFiles(element.get(item), images);
+        }
+      }
+    });
   }
 }
