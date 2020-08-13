@@ -128,11 +128,10 @@ export class ComplementResponse {
     if (typeof content !== 'undefined' && typeof content.data !== 'undefined') {
       body = content.data;
 
-      if (
-        typeof images !== 'undefined' &&
-        typeof images.pagination !== 'undefined'
-      ) {
-        body = body.data;
+      if (typeof images !== 'undefined') {
+        if (typeof images.pagination !== 'undefined') {
+          body = body.data;
+        }
         this.filterFiles(body, images);
       }
     }
