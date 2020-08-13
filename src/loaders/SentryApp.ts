@@ -10,8 +10,7 @@ export class SentryApp {
     await Sentry.init(this.getConfig());
     // await this.configScopes();
     if (config.SENTRY_INSTALL) {
-      // @ts-ignore
-      myUndefinedFunction();
+      console.log(typeof myUndefinedFunction());
     }
   };
 

@@ -12,8 +12,11 @@ DotenvFlow.config({path: './environment'});
 
 let database = {};
 
-const processEnv = process.env.ENV || 'development';
+const processEnv = process.env.ENV || 'local';
 switch (processEnv) {
+  case 'local':
+    database = DatabaseConfig.local;
+    break;
   case 'development':
     database = DatabaseConfig.development;
     break;
