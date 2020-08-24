@@ -48,25 +48,23 @@ export class ComplementResponse {
     }
 
     if (typeof images !== 'undefined' && images !== null && images) {
-      // Upload Files
-      if (typeof images.upload !== 'undefined' && images.upload !== null) {
-        if (images.upload) {
-          // Upload File
-          const routerTemp: string =
-            typeof images.router !== 'undefined' && images.router !== null
-              ? `${images.router}/${slug}`
-              : slug;
-          uploadAnyFiles.uploadFiles(images.files, routerTemp);
-        }
-      }
       // Update File
-      if (typeof images.upload !== 'undefined' && images.upload !== null) {
+      if (
+        (typeof images.upload !== 'undefined' && images.upload !== null) ||
+        (typeof images.update !== 'undefined' && images.update !== null)
+      ) {
+        // Remove Files
+        const routerTemp: string =
+          typeof images.router !== 'undefined' && images.router !== null
+            ? `${images.router}/${slug}`
+            : slug;
         if (images.update) {
-          // Remove Files
-          const routerTemp: string = images.router ?? '';
           uploadAnyFiles.deleteFolderRecursive(routerTemp, slug);
         }
+        // Upload File
+        uploadAnyFiles.uploadFiles(images.files, routerTemp);
       }
+      
       // List Elements
       if (typeof images.listAll !== 'undefined' && images.listAll !== null) {
         const files: any = uploadAnyFiles.getFiles(slug);
