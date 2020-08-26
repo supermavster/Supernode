@@ -101,6 +101,7 @@ export class ComplementResponse {
           singleFile?: boolean;
           pagination?: boolean;
           recursive?: Array<string>;
+          getByTypeItem?: boolean;
         }
       | undefined = undefined,
     middleware: boolean = false
@@ -127,10 +128,20 @@ export class ComplementResponse {
       body = content.data;
 
       if (typeof images !== 'undefined') {
+        // Get Pagination Data
         if (typeof images.pagination !== 'undefined') {
           body = body.data;
         }
+        // Filter Files
         this.filterFiles(body, images);
+        // Super List by Type file and Objects
+        if (
+          typeof images.getByTypeItem !== 'undefined' &&
+          images.getByTypeItem !== null
+        ) {
+          const uploadAnyFiles = new UploadAnyFiles();
+          body = uploadAnyFiles.getTitleItemsByType(body);
+        }
       }
     }
 

@@ -110,6 +110,7 @@ export class UploadAnyFiles {
       (element: any) => element.indexOf('main') > 0
     );
     response.main = mainImage[0] ?? '';
+
     return response;
   };
 
@@ -201,6 +202,96 @@ export class UploadAnyFiles {
     const ext = Path.extname(tempFile.name);
     const pathFile = `${config.STATIC_UPLOADS}/${folderName}${ext}`.toLocaleLowerCase();
     tempFile.mv(pathFile);
+  };
+
+  getTitleItemsByType = (dataMain: any) => {
+    const groupBy = (key: any) => (array: any) =>
+      array.reduce((objectsByKeyValue: any, obj: any) => {
+        const value = obj[key];
+        // eslint-disable-next-line no-param-reassign
+        objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+        return objectsByKeyValue;
+      }, {});
+    // eslint-disable-next-line func-style
+    const reduceData = function (data: any) {
+      return Array.from(
+        {length: Math.max(...data.map((object: any) => object.length))},
+        (_: any, index: any) =>
+          data.reduceRight(
+            (reducer: any, object: any) =>
+              index < object.length ? [...reducer, object[index]] : reducer,
+            []
+          )
+      ).flat();
+    };
+    // eslint-disable-next-line no-console
+    console.log(dataMain);
+    // Data
+    const filterData = dataMain
+      .map((element: any) => {
+        // eslint-disable-next-line no-console
+        console.log(element.get('files'));
+        return {
+          id: element.get('id'),
+          files: element.get('files')
+        };
+      })
+      .filter(
+        (element: any) =>
+          typeof element !== 'undefined' &&
+          typeof element.files !== 'undefined' &&
+          typeof element.files.orderByType !== 'undefined' &&
+          Object.keys(element.files.orderByType).length > 0
+      );
+    // Filter by object
+    const keys = filterData.map((element: any) => {
+      return {id: element.id, elements: Object.keys(element.files.orderByType)};
+    });
+    const groupByBrand = groupBy('elements');
+    const groupElements = groupByBrand(keys);
+    // Single Data
+    const singleData = Object.keys(groupElements).map((element) =>
+      element.split(',')
+    );
+    const count = reduceData(singleData).reduce((items, key) => {
+      // eslint-disable-next-line no-param-reassign
+      items[key] = (items[key] || 0) + 1;
+      return items;
+    }, {});
+    let newResponse: any = [];
+    Object.keys(count).forEach((element) => {
+      newResponse.push([element, []]);
+    });
+    newResponse = Object.fromEntries(new Map(newResponse));
+    Object.keys(groupElements).forEach((element) => {
+      element.split(',').forEach((data) => {
+        // eslint-disable-next-line array-callback-return
+        Object.keys(count).map((elementCount: any) => {
+          if (elementCount === data) {
+            newResponse[elementCount].push(
+              groupElements[element].map((el: any) => el.id)
+            );
+          }
+        });
+      });
+    });
+    const lastFilterData: any = [];
+    Object.keys(newResponse).forEach((element) => {
+      lastFilterData.push([element, reduceData(newResponse[element])]);
+    });
+    newResponse = Object.fromEntries(new Map(lastFilterData));
+    Object.keys(newResponse).forEach((element) => {
+      const newData: any = [];
+      newResponse[element].forEach((data: any) => {
+        dataMain.forEach((item: any) => {
+          if (item.get('id') === data) {
+            newData.push(item);
+          }
+        });
+        newResponse[element] = newData;
+      });
+    });
+    return newResponse;
   };
 
   constructor(route = 'users') {
