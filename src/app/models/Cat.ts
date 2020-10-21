@@ -10,7 +10,6 @@ import {
   HasMany
 } from 'sequelize-typescript';
 
-
 @Table({timestamps: true, tableName: 'cat'})
 export class Cat extends Model<Cat> {
   @PrimaryKey

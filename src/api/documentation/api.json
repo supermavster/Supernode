@@ -3,194 +3,122 @@
   "paths": {
     "/sp/generate-access-token": {
       "get": {
-        "tags": [
-          "sp"
-        ],
+        "tags": ["sp"],
         "description": "Generate Services - SP - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/signup": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/confirm-email/:suid": {
       "get": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/login": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/profile": {
       "get": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/recovery-password": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/check-code": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/change-password": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/onboarding/validation-email": {
       "post": {
-        "tags": [
-          "onboarding"
-        ],
+        "tags": ["onboarding"],
         "description": "Generate Services - ONBOARDING - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/cat": {
       "get": {
-        "tags": [
-          "cat"
-        ],
+        "tags": ["cat"],
         "description": "Generate Services - CAT - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "post": {
-        "tags": [
-          "cat"
-        ],
+        "tags": ["cat"],
         "description": "Generate Services - CAT - POST",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/cat/all": {
       "get": {
-        "tags": [
-          "cat"
-        ],
+        "tags": ["cat"],
         "description": "Generate Services - CAT - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/cat/:id": {
       "get": {
-        "tags": [
-          "cat"
-        ],
+        "tags": ["cat"],
         "description": "Generate Services - CAT - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "put": {
-        "tags": [
-          "cat"
-        ],
+        "tags": ["cat"],
         "description": "Generate Services - CAT - PUT",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       },
       "delete": {
-        "tags": [
-          "cat"
-        ],
+        "tags": ["cat"],
         "description": "Generate Services - CAT - DELETE",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/cat/deactivate/:id": {
       "put": {
-        "tags": [
-          "cat"
-        ],
+        "tags": ["cat"],
         "description": "Generate Services - CAT - PUT",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/cat/:limit/:offset": {
       "get": {
-        "tags": [
-          "cat"
-        ],
+        "tags": ["cat"],
         "description": "Generate Services - CAT - GET",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     },
     "/cat/change-status/:id": {
       "put": {
-        "tags": [
-          "cat"
-        ],
+        "tags": ["cat"],
         "description": "Generate Services - CAT - PUT",
-        "produces": [
-          "application/json"
-        ]
+        "produces": ["application/json"]
       }
     }
   },
@@ -216,14 +144,7 @@
       "description": "User Services"
     }
   ],
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ]
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"]
 }
