@@ -1,0 +1,77 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:14.7.0
+pipelines:
+  default:
+    - step:
+        name: Install Dependencies
+        caches:
+          - node
+        script:
+          - yarn install
+    - step:
+        name: Clean Code
+        caches:
+          - node
+        script:
+          - yarn build:all
+  branches:
+    development:
+      - step:
+          name: Install Dependencies
+          caches:
+            - node
+          script:
+            - yarn install
+      - step:
+          name: Clean Code
+          caches:
+            - node
+          script:
+            - yarn clean
+      - step:
+          name: Clean Build
+          caches:
+            - node
+          script:
+            - yarn build:all
+    production:
+      - step:
+          name: Install Dependencies
+          caches:
+            - node
+          script:
+            - yarn install
+      - step:
+          name: Clean Code
+          caches:
+            - node
+          script:
+            - yarn clean
+      - step:
+          name: Build
+          deployment: production
+          caches:
+            - node
+          script:
+            - chmod 777 ./base.sh
+            - sed -i "s/PROJECT/${PROJECT}/g" ./base.sh
+            - chmod 777 ./base.sh
+            - sed -i "s/PROJECT/${PROJECT}/g" ./package.json
+            - yarn super:build
+            - pipe: atlassian/sftp-deploy:0.5.5
+              variables:
+                USER: $USER
+                SERVER: "$SERVER"
+                REMOTE_PATH: /home/$PROJECT/
+                LOCAL_PATH: "dist/*"
+                DEBUG: "true"
+                EXTRA_ARGS: "-i cert/$USER.pem"
+          after-script:
+            - ls -alhr
+            - cd cert/
+            - chmod 400 $USER.pem
+            - ssh -i $USER.pem $USER@$SERVER /home/$PROJECT/base.sh
